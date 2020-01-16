@@ -1,0 +1,398 @@
+<!doctype html>
+<html>
+<head>
+<title>SALARIEVO</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=480, user-scalable=yes">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+	  <!-- use the font -->
+	  <style>
+	    body {
+	      font-family: 'Roboto', sans-serif;
+	      font-size: 48px;
+	    }
+	  </style>
+	  
+    <style>
+    	body {
+    		/*background-image: url("map.png");*/
+   			padding:0;
+   			margin:0;
+    	}
+    	#map {
+    		width: 100%;
+    	}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+    	var imgs = {
+  "pic-1.jpg": [
+    0.47333772218564846,
+    0.15384615384615385,
+    "Моя безбожная Россия"
+  ],
+  "pic-2.jpg": [
+    0.4549045424621461,
+    0.6,
+    "Photo label 2"
+  ],
+  "pic-3.jpg": [
+    0.7063857801184991,
+    0.8970414201183432,
+    "Photo label 3"
+  ],
+  "pic-4.jpg": [
+    0.38314680710994076,
+    0.24378698224852072,
+    "Photo label 4"
+  ],
+  "pic-5.jpg": [
+    0.3739302172481896,
+    0.749112426035503,
+    "Радушные особняки…"
+  ],
+  "pic-7.jpg": [
+    0.48321263989466756,
+    0.33727810650887574,
+    "1"
+  ],
+  "pic-8.jpg": [
+    0.33311389071757735,
+    0.2591715976331361,
+    "Photo label 8"
+  ],
+  "pic-9.jpg": [
+    0.7287689269256089,
+    0.46745562130177515,
+    "Мой взор мечтанья оросили"
+  ],
+  "pic-10.jpg": [
+    0.8617511520737328,
+    0.5325443786982249,
+    "Полны значенья пустячки"
+  ],
+  "pic-11.jpg": [
+    0.8676761026991442,
+    0.5207100591715976,
+    "Мечты! вы – странницы босые"
+  ],
+  "pic-12.jpg": [
+    0.3877551020408163,
+    0.6970414201183432,
+    "Он горек, мутный твой отстой"
+  ],
+  "pic-13.jpg": [
+    0.4147465437788018,
+    0.685207100591716,
+    "Photo label 13"
+  ],
+  "pic-14.jpg": [
+    0.4423963133640553,
+    0.5349112426035503,
+    "Photo label 14"
+  ],
+  "pic-15.jpg": [
+    0.4377880184331797,
+    0.5112426035502958,
+    "В расцвете славы жизнь текла"
+  ],
+  "pic-16.jpg": [
+    0.40421329822251484,
+    0.28402366863905326,
+    "Photo label 16"
+  ],
+  "pic-17.jpg": [
+    0.31994733377221857,
+    0.22840236686390533,
+    "Иду, и с каждым шагом рьяней"
+  ],
+  "pic-18.jpg": [
+    0.3390388413429888,
+    0.15857988165680473,
+    "Своя в тоскующей толпе"
+  ],
+  "pic-19.jpg": [
+    0.3377221856484529,
+    0.17041420118343195,
+    "Photo label 19"
+  ],
+  "pic-20.jpg": [
+    0.40355497037524685,
+    0.31479289940828403,
+    "И ты, вечерняя прогулка"
+  ],
+  "pic-21.jpg": [
+    0.39104674127715605,
+    0.33254437869822484,
+    "Photo label 21"
+  ],
+  "pic-22.jpg": [
+    0.45951283739302173,
+    0.3739644970414201,
+    "Торопит смерть при спуске флага"
+  ],
+  "pic-23.jpg": [
+    0.3706385780118499,
+    0.11242603550295859,
+    "Версту глотаю за верстой"
+  ],
+  "pic-24.jpg": [
+    0.8169848584595129,
+    1.0840236686390532,
+    "И волоса на голове"
+  ],
+  "pic-25.jpg": [
+    0.24226464779460172,
+    0.5005917159763313,
+    "Верста к версте — к звену звено"
+  ],
+  "pic-26.jpg": [
+    0.2876892692560895,
+    0.44497041420118344,
+    "О, зиму смерть не озадачит"
+  ],
+  "pic-27.jpg": [
+    0.32784726793943386,
+    0.4544378698224852,
+    "Кокотка оделяет кружки"
+  ],
+  "pic-28.jpg": [
+    0.36537195523370636,
+    0.4236686390532544,
+    "Photo label 28"
+  ],
+  "pic-29.jpg": [
+    0.3706385780118499,
+    0.4236686390532544,
+    "Photo label 29"
+  ],
+  "pic-30.jpg": [
+    0.45951283739302173,
+    0.6792899408284023,
+    "Капель зимы души моей"
+  ],
+  "pic-31.jpg": [
+    0.4628044766293614,
+    0.7124260355029586,
+    "Photo label 31"
+  ],
+  "pic-32.jpg": [
+    0.6326530612244898,
+    0.6011834319526628,
+    "hgjg"
+  ],
+  "pic-33.jpg": [
+    0.4608294930875576,
+    0.06627218934911243,
+    "Приходят в дивное движенье"
+  ],
+  "pic-34.jpg": [
+    0.619486504279131,
+    0.07692307692307693,
+    "Незаменимая земля"
+  ],
+  "pic-35.jpg": [
+    0.597761685319289,
+    0.05562130177514793,
+    "Photo label 35"
+  ],
+  "pic-36.jpg": [
+    0.7478604344963792,
+    0.25443786982248523,
+    "И сам себе себя читая"
+  ],
+  "pic-37.jpg": [
+    0.8380513495720869,
+    0.4366863905325444,
+    "В ней и убогое богато"
+  ],
+  "pic-38.jpg": [
+    0.4272547728768927,
+    0.41775147928994083,
+    "Photo label 38"
+  ],
+  "pic-39.jpg": [
+    0.4976958525345622,
+    0.5100591715976331,
+    "Photo label 39"
+  ],
+  "pic-40.jpg": [
+    0.3535220539828835,
+    0.4319526627218935,
+    "Photo label 40"
+  ],
+  "pic-41.jpg": [
+    0.3034891375905201,
+    0.23550295857988165,
+    "Photo label 41"
+  ],
+  "pic-42.jpg": [
+    0.45358788676761025,
+    0.41183431952662725,
+    "Подъехав в щегольском «купе»"
+  ],
+  "pic-43.jpg": [
+    0.48321263989466756,
+    0.4532544378698225,
+    "Photo label 43"
+  ],
+  "pic-44.jpg": [
+    0.4720210664911126,
+    0.47337278106508873,
+    "Вспененная и золотая!"
+  ],
+  "pic-45.jpg": [
+    0.47465437788018433,
+    0.4319526627218935,
+    "Photo label 45"
+  ],
+  "pic-46.jpg": [
+    0.5562870309414089,
+    0.7396449704142012,
+    "Photo label 46"
+  ],
+  "pic-47.jpg": [
+    0.5806451612903226,
+    0.6899408284023668,
+    "Photo label 47"
+  ],
+  "pic-48.jpg": [
+    0.5128373930217248,
+    0.48757396449704143,
+    "Photo label 48"
+  ],
+  "pic-49.jpg": [
+    0.19157340355497038,
+    0.5609467455621302,
+    "Идущие через поля"
+  ],
+  "pic-50.jpg": [
+    0.6616194865042792,
+    0.659171597633136,
+    "Неподражаемой России"
+  ]
+};
+
+    var imgData = {};
+    $(document).ready(function(){
+	    var map = $('#map')[0];
+	    var w = map.width; 
+	    var h = map.height;
+	    
+	    $(window).on('resize', function(){
+		      placeElems(map.width, map.height);
+		});
+
+	    var placeElems = function(w, h) {
+	    	$.each(imgs, function(k,v){
+	    		obj = imgData[k];
+	    		obj.cont.css('left', parseInt(v[0]*w) + 'px');
+	    		obj.cont.css('top', parseInt(v[1]*h) + 'px');
+	    	});
+	    	map.lastw = w;
+	    	map.lasth = h;
+	    };
+
+    	$.each(imgs, function(k,v){
+    		let ki = k;
+    		let vi = v;
+    		let obj = new Object();
+    		obj.cont = $('<div>');
+    		obj.cont.addClass('item');
+    		obj.cont.addClass('t');
+    		obj.cont.addClass('l');
+    		/*obj.cont.draggable({
+			  drag: function() {
+			  	imgs[ki][0]=parseInt(obj.cont.css('left')) / map.lastw;
+			  	imgs[ki][1]=parseInt(obj.cont.css('top')) / map.lasth;
+			  }
+			});*/
+
+    		obj.pt = $('<div>');
+    		obj.pt.addClass('point');
+
+    		obj.line = $('<div>');
+    		obj.line.addClass('line');
+
+    		obj.text = $('<div>');
+    		obj.text.addClass('text');
+    		obj.text.text(v[2]);
+
+    		obj.img = $('<img>');
+    		obj.img.addClass('img');
+    		obj.img.attr('src', 'thumbs/' + k);
+
+    		obj.cont.append([
+    			obj.pt, obj.line, obj.text, obj.img
+    		]);
+
+    		obj.text[0].contentEditable = "true";
+			obj.text[0].oninput = function() {
+				imgs[ki][2] = obj.text.text();
+			};
+
+    		$('body>div').append(obj.cont);
+
+    		obj.k = k;
+    		obj.v = v;
+
+    		imgData[k] = obj;
+    	});
+
+    	placeElems(map.width, map.height);
+    });
+    </script>
+    <style>
+    	.item {
+    		position:absolute;
+    		width:0;
+    		height:0;
+    	}
+    	.item>.point{
+    		width:6px; height:6px;
+    		position:absolute;
+    		border-radius:3px;
+    		left:-3px;
+    		top:-3px;
+    		background-color: red;
+    	}
+    	.item>.img{
+    		width:100px;
+    		max-height:0;
+    		border:1px solid red;
+    		position:absolute;
+    		transition: max-height .3s ease-in;
+    	}
+    	.item:hover>.img{
+    		max-height:100px;
+    	}
+    	.item.l>.img{ left:-1px; }
+    	.item.r>.img{ right:-1px; }
+    	.item.t>.img{ bottom:-1px; }
+    	.item.b>.img{ top:-1px; }
+    	.item>.text{
+		    background: rgba(0,0,0,.3);
+		    color: white;
+		    padding: 3px;
+		    border-radius: 6px;
+		    font-size: 80%;
+		    position: absolute;
+		    max-width: 100px;
+		    cursor:pointer;
+		    white-space: nowrap;
+    	}
+    	.item.t>.text{ top:0; }
+    	.item.b>.text{ bottom:0; }
+    	.item.l>.text{ left:0; }
+    	.item.r>.text{ right:0; }
+    </style>
+</head>
+<body>
+	<div></div>
+	<img src="map.png" id="map"/>
+</body>
+</html>

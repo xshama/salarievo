@@ -1,0 +1,766 @@
+<!doctype html>
+<html>
+<head>
+<title>SALARIEVO</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=480, user-scalable=no, minimum-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+      <!-- use the font -->
+      <style>
+        body {
+          font-family: 'Roboto', sans-serif;
+        }
+      </style>
+
+    <style>
+    	body {
+    		/*background-image: url("map.png");*/
+   			padding:0;
+   			margin:0;
+    	}
+    	#map {
+    		width: 100%;
+    	}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+    	var imgs = {
+   "pic-1.jpg":{
+      "x":0.47333772218564846,
+      "y":0.15384615384615385,
+      "lbl":"Моя безбожная Россия",
+      "l":false,
+      "t":false
+   },
+   "pic-2.jpg":{
+      "x":0.4549045424621461,
+      "y":0.6,
+      "lbl":"Photo label 2",
+      "l":false,
+      "t":true
+   },
+   "pic-3.jpg":{
+      "x":0.7063857801184991,
+      "y":0.8970414201183432,
+      "lbl":"Photo label 3",
+      "l":true,
+      "t":true
+   },
+   "pic-4.jpg":{
+      "x":0.38314680710994076,
+      "y":0.24378698224852072,
+      "lbl":"Photo label 4",
+      "l":false,
+      "t":false
+   },
+   "pic-5.jpg":{
+      "x":0.3739302172481896,
+      "y":0.749112426035503,
+      "lbl":"Радушные особняки…",
+      "l":true,
+      "t":true
+   },
+   "pic-7.jpg":{
+      "x":0.48321263989466756,
+      "y":0.33727810650887574,
+      "lbl":"1",
+      "l":false,
+      "t":false
+   },
+   "pic-8.jpg":{
+      "x":0.33311389071757735,
+      "y":0.2591715976331361,
+      "lbl":"Photo label 8",
+      "l":false,
+      "t":false
+   },
+   "pic-9.jpg":{
+      "x":0.7287689269256089,
+      "y":0.46745562130177515,
+      "lbl":"Мой взор мечтанья оросили",
+      "l":true,
+      "t":false
+   },
+   "pic-10.jpg":{
+      "x":0.8617511520737328,
+      "y":0.5325443786982249,
+      "lbl":"Полны значенья пустячки",
+      "l":true,
+      "t":true
+   },
+   "pic-11.jpg":{
+      "x":0.8676761026991442,
+      "y":0.5207100591715976,
+      "lbl":"Мечты! вы – странницы босые",
+      "l":true,
+      "t":true
+   },
+   "pic-12.jpg":{
+      "x":0.3877551020408163,
+      "y":0.6970414201183432,
+      "lbl":"Он горек, мутный твой отстой",
+      "l":true,
+      "t":true
+   },
+   "pic-13.jpg":{
+      "x":0.4147465437788018,
+      "y":0.685207100591716,
+      "lbl":"Photo label 13",
+      "l":true,
+      "t":true
+   },
+   "pic-14.jpg":{
+      "x":0.4423963133640553,
+      "y":0.5349112426035503,
+      "lbl":"Photo label 14",
+      "l":false,
+      "t":true
+   },
+   "pic-15.jpg":{
+      "x":0.4377880184331797,
+      "y":0.5112426035502958,
+      "lbl":"В расцвете славы жизнь текла",
+      "l":true,
+      "t":true
+   },
+   "pic-16.jpg":{
+      "x":0.40421329822251484,
+      "y":0.28402366863905326,
+      "lbl":"Photo label 16",
+      "l":false,
+      "t":false
+   },
+   "pic-17.jpg":{
+      "x":0.31994733377221857,
+      "y":0.22840236686390533,
+      "lbl":"Иду, и с каждым шагом рьяней",
+      "l":false,
+      "t":false
+   },
+   "pic-18.jpg":{
+      "x":0.3390388413429888,
+      "y":0.15857988165680473,
+      "lbl":"Своя в тоскующей толпе",
+      "l":false,
+      "t":false
+   },
+   "pic-19.jpg":{
+      "x":0.3377221856484529,
+      "y":0.17041420118343195,
+      "lbl":"Photo label 19",
+      "l":false,
+      "t":false
+   },
+   "pic-20.jpg":{
+      "x":0.40355497037524685,
+      "y":0.31479289940828403,
+      "lbl":"И ты, вечерняя прогулка",
+      "l":false,
+      "t":false
+   },
+   "pic-21.jpg":{
+      "x":0.39104674127715605,
+      "y":0.33254437869822484,
+      "lbl":"Photo label 21",
+      "l":true,
+      "t":false
+   },
+   "pic-22.jpg":{
+      "x":0.45951283739302173,
+      "y":0.3739644970414201,
+      "lbl":"Торопит смерть при спуске флага",
+      "l":false,
+      "t":false
+   },
+   "pic-23.jpg":{
+      "x":0.3706385780118499,
+      "y":0.11242603550295859,
+      "lbl":"Версту глотаю за верстой",
+      "l":false,
+      "t":false
+   },
+   "pic-24.jpg":{
+      "x":0.30924170616113744,
+      "y":0.17716115261472787,
+      "lbl":"И волоса на голове",
+      "l":true,
+      "t":true
+   },
+   "pic-25.jpg":{
+      "x":0.24226464779460172,
+      "y":0.5005917159763313,
+      "lbl":"Верста к версте — к звену звено",
+      "l":false,
+      "t":true
+   },
+   "pic-26.jpg":{
+      "x":0.2876892692560895,
+      "y":0.44497041420118344,
+      "lbl":"О, зиму смерть не озадачит",
+      "l":false,
+      "t":false
+   },
+   "pic-27.jpg":{
+      "x":0.32784726793943386,
+      "y":0.4544378698224852,
+      "lbl":"Кокотка оделяет кружки",
+      "l":false,
+      "t":false
+   },
+   "pic-28.jpg":{
+      "x":0.36537195523370636,
+      "y":0.4236686390532544,
+      "lbl":"Photo label 28",
+      "l":true,
+      "t":false
+   },
+   "pic-29.jpg":{
+      "x":0.3706385780118499,
+      "y":0.4236686390532544,
+      "lbl":"Photo label 29",
+      "l":false,
+      "t":false
+   },
+   "pic-30.jpg":{
+      "x":0.45951283739302173,
+      "y":0.6792899408284023,
+      "lbl":"Капель зимы души моей",
+      "l":false,
+      "t":true
+   },
+   "pic-31.jpg":{
+      "x":0.4628044766293614,
+      "y":0.7124260355029586,
+      "lbl":"Photo label 31",
+      "l":false,
+      "t":true
+   },
+   "pic-32.jpg":{
+      "x":0.6326530612244898,
+      "y":0.6011834319526628,
+      "lbl":"hgjg",
+      "l":false,
+      "t":true
+   },
+   "pic-33.jpg":{
+      "x":0.4608294930875576,
+      "y":0.06627218934911243,
+      "lbl":"Приходят в дивное движенье",
+      "l":false,
+      "t":false
+   },
+   "pic-34.jpg":{
+      "x":0.619486504279131,
+      "y":0.07692307692307693,
+      "lbl":"Незаменимая земля",
+      "l":true,
+      "t":false
+   },
+   "pic-35.jpg":{
+      "x":0.597761685319289,
+      "y":0.05562130177514793,
+      "lbl":"Photo label 35",
+      "l":true,
+      "t":false
+   },
+   "pic-36.jpg":{
+      "x":0.7478604344963792,
+      "y":0.25443786982248523,
+      "lbl":"И сам себе себя читая",
+      "l":true,
+      "t":false
+   },
+   "pic-37.jpg":{
+      "x":0.8380513495720869,
+      "y":0.4366863905325444,
+      "lbl":"В ней и убогое богато",
+      "l":true,
+      "t":false
+   },
+   "pic-38.jpg":{
+      "x":0.4272547728768927,
+      "y":0.41775147928994083,
+      "lbl":"Photo label 38",
+      "l":false,
+      "t":false
+   },
+   "pic-39.jpg":{
+      "x":0.4976958525345622,
+      "y":0.5100591715976331,
+      "lbl":"Photo label 39",
+      "l":false,
+      "t":true
+   },
+   "pic-40.jpg":{
+      "x":0.3535220539828835,
+      "y":0.4319526627218935,
+      "lbl":"Photo label 40",
+      "l":false,
+      "t":false
+   },
+   "pic-41.jpg":{
+      "x":0.3034891375905201,
+      "y":0.23550295857988165,
+      "lbl":"Photo label 41",
+      "l":true,
+      "t":false
+   },
+   "pic-42.jpg":{
+      "x":0.45358788676761025,
+      "y":0.41183431952662725,
+      "lbl":"Подъехав в щегольском «купе»",
+      "l":false,
+      "t":false
+   },
+   "pic-43.jpg":{
+      "x":0.48321263989466756,
+      "y":0.4532544378698225,
+      "lbl":"Photo label 43",
+      "l":false,
+      "t":false
+   },
+   "pic-44.jpg":{
+      "x":0.4720210664911126,
+      "y":0.47337278106508873,
+      "lbl":"Вспененная и золотая!",
+      "l":false,
+      "t":false
+   },
+   "pic-45.jpg":{
+      "x":0.47465437788018433,
+      "y":0.4319526627218935,
+      "lbl":"Photo label 45",
+      "l":false,
+      "t":false
+   },
+   "pic-46.jpg":{
+      "x":0.5562870309414089,
+      "y":0.7396449704142012,
+      "lbl":"Photo label 46",
+      "l":true,
+      "t":true
+   },
+   "pic-47.jpg":{
+      "x":0.5806451612903226,
+      "y":0.6899408284023668,
+      "lbl":"Photo label 47",
+      "l":false,
+      "t":true
+   },
+   "pic-48.jpg":{
+      "x":0.5128373930217248,
+      "y":0.48757396449704143,
+      "lbl":"Photo label 48",
+      "l":true,
+      "t":false
+   },
+   "pic-49.jpg":{
+      "x":0.19157340355497038,
+      "y":0.5609467455621302,
+      "lbl":"Идущие через поля",
+      "l":false,
+      "t":true
+   },
+   "pic-50.jpg":{
+      "x":0.6616194865042792,
+      "y":0.659171597633136,
+      "lbl":"Неподражаемой России",
+      "l":true,
+      "t":true
+   },
+   "pic-51.jpg":{
+      "x":0.7505924170616114,
+      "y":0.6488794023479189,
+      "lbl":"pic-51",
+      "l":true,
+      "t":true
+   },
+   "pic-52.jpg":{
+      "x":0.41113744075829384,
+      "y":0.6072572038420491,
+      "lbl":"pic-52",
+      "l":true,
+      "t":true
+   },
+   "pic-53.jpg":{
+      "x":0.5882701421800948,
+      "y":0.8740661686232657,
+      "lbl":"pic-53",
+      "l":true,
+      "t":true
+   }
+};
+
+    var imgData = {};
+    $(document).ready(function(){
+	    var map = $('#map')[0];
+	    var w = map.width; 
+	    var h = map.height;
+        var fullImg = $('#fullImg');
+        var fullText = $('#fullText');
+	    
+	    $(window).on('resize', function(){
+		      placeElems(map.width, map.height);
+		});
+
+        $('#menu>ul>li').on('click', function() {
+            var textElem = $('#' + $(this).attr('text'));
+            var newDiv = $('<div></div>');
+            newDiv.html(textElem.html());
+            fullText.empty();
+            fullText.append(newDiv);
+            fullText.addClass('shown');
+        });
+
+        fullImg.on('load', function() {
+            placeElems(map.width, map.height);
+        });
+
+	    var placeElems = function(w, h) {
+	    	$.each(imgs, function(k,v){
+	    		obj = imgData[k];
+	    		obj.cont.css('left', parseInt(v['x']*w) + 'px');
+	    		obj.cont.css('top', parseInt(v['y']*h) + 'px');
+	    	});
+	    	map.lastw = w;
+	    	map.lasth = h;
+	    };
+
+        var showFullImg = function(fromImg, imgSrc, text) {
+            $('<img/>').attr('src', imgSrc).on('load', function() {
+               $(this).remove();
+                fullImg.find('.bgr').css('background-image', 'url(' + imgSrc + ')');
+                fullImg.addClass('shown');
+                fullImg.fromElem=fromImg;
+                fullImg.find('.label').text(text);
+            });
+        };
+
+        fullImg.on('click', function() {
+            fullImg.removeClass('shown');
+        });
+        fullText.on('click', function() {
+            fullText.removeClass('shown');
+        });
+
+        var move=false;
+        var edit=false;
+
+        $('#taCode').val(JSON.stringify(imgs));
+        $('#taCode').on('input', function() {
+            imgs = JSON.parse($('#taCode').val());
+            initElems();
+            placeElems(map.width, map.height);
+        });
+        $('#chEdit').on('change', function(){
+            edit = $(this).is(':checked');
+            initElems();
+            placeElems(map.width, map.height);
+        });
+        $('#chMove').on('change', function(){
+            move = $(this).is(':checked');
+            initElems();
+            placeElems(map.width, map.height);
+        });
+
+        var initElems = function() {
+            $('#thumbs').empty();
+            imgData = {};
+        	$.each(imgs, function(k,v){
+        		let ki = k;
+        		let obj = new Object();
+        		obj.cont = $('<div>');
+        		obj.cont.addClass('item');
+        		obj.cont.addClass(v['t'] ? 't' : 'b');
+        		obj.cont.addClass(v['l'] ? 'r' : 'l');
+
+        		if(move) obj.cont.draggable({
+    			  drag: function() {
+    			  	imgs[ki]['x']=parseInt(obj.cont.css('left')) / map.lastw;
+    			  	imgs[ki]['y']=parseInt(obj.cont.css('top')) / map.lasth;
+
+                    $('#taCode').val(JSON.stringify(imgs));
+    			  }
+    			});
+
+        		obj.pt = $('<div>');
+        		obj.pt.addClass('point');
+
+        		obj.line = $('<div>');
+        		obj.line.addClass('line');
+
+        		obj.text = $('<div>');
+        		obj.text.addClass('text');
+        		obj.text.text(v['lbl']);
+
+                if(edit) {
+                    obj.text[0].contentEditable = "true";
+                    obj.text[0].oninput = function() {
+                        imgs[ki]['lbl'] = obj.text.text();
+
+                        $('#taCode').val(JSON.stringify(imgs));
+                    };
+                }
+
+        		obj.img = $('<img>');
+        		obj.img.addClass('img');
+        		obj.img.attr('src', 'thumbs/' + k);
+                
+                obj.img.on('click', function() {
+                    showFullImg(obj.img, 'photos/' + k, v['lbl']);
+                });
+
+        		obj.cont.append([
+        			obj.pt, obj.line, obj.text, obj.img
+        		]);
+
+        		$('#thumbs').append(obj.cont);
+
+            		obj.k = k;
+            		obj.v = v;
+
+            		imgData[k] = obj;
+            	}
+            );
+        };
+
+        initElems();
+    	placeElems(map.width, map.height);
+    });
+    </script>
+    <style>
+    	.item {
+    		position:absolute;
+    		width:0;
+    		height:0;
+    	}
+    	.item>.point{
+    		width:6px; height:6px;
+    		position:absolute;
+    		border-radius:3px;
+    		left:-3px;
+    		top:-3px;
+    		background-color: red;
+    	}
+    	.item>.img{
+    		width:100px;
+    		max-height:0;
+    		border:solid;
+            border-width: 1px 0 1px 0;
+            border-color:#ff000080;
+    		position:absolute;
+    		transition: max-height .3s ease-in,
+                z-index .3s, border-color .3s;
+            z-index:0;
+            cursor:pointer;
+            /*border-radius: 5px 5px 0 0;*/
+    	}
+    	.item:hover>.img{
+    		max-height:100px;
+            z-index:100;
+            /*border-color:#ff000000;*/
+    	}
+    	.item.l>.img{ left:-1px; }
+    	.item.r>.img{ right:-1px; }
+    	.item.t>.img{ bottom:-1px; }
+    	.item.b>.img{ top:-1px; }
+    	.item>.text{
+		    background: rgba(0,0,0,.3);
+		    color: white;
+		    padding: 0 3px;
+		    border-radius: 6px;
+		    font-size: 80%;
+		    position: absolute;
+		    cursor:pointer;
+            white-space: nowrap;
+            max-height: 0;
+            transition: max-height .3s ease-in, padding .3s;
+            overflow: hidden;
+            z-index:50;
+    	}
+        .item:hover>.text{
+            max-height:100px;
+            padding: 3px;
+        }
+    	.item.t>.text{ top:0; }
+    	.item.b>.text{ bottom:0; }
+    	.item.l>.text{ left:0; }
+    	.item.r>.text{ right:0; }
+        #fullImg,#fullText{
+            /*display:none;*/
+            opacity:0;
+            top:0;
+            left:0;
+            background-color: rgba(0,0,0,0);
+            z-index:-1;
+            position:fixed;
+            width:100%;
+            height:100%;
+            transition: opacity .5s, z-index .5s;
+        }
+        #fullImg.shown,#fullText.shown {
+            opacity:1;
+            display:block;
+            z-index:10000;
+            background-color: rgba(0,0,0,.8);
+        }
+        #fullText.shown {
+            display:table-cell;
+            vertical-align: middle;
+        }
+        #fullText>div{
+            max-width: 80%;
+            padding: 3rem;
+            background: #ffffffa3;
+            margin: auto;
+            border-radius: 10px;
+            font-size: 96%;
+        }
+        #fullImg>.bgr {
+            background: no-repeat;
+            background-position: center;
+            background-size: contain;
+            right:0rem;
+            left:0rem;
+            top:0rem;
+            bottom:0rem;
+            position: absolute;
+        }
+        #fullImg.shown>.bgr{
+            display:block;
+            cursor:pointer;
+        }
+        #fullImg>.label{
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.6) 100%);
+            color: rgba(255, 255, 255, 0.69);
+            font-family: Tahoma;
+            font-size: 120%;
+            position: absolute;
+            bottom: 0;
+            padding: .5rem;
+            right: 0;
+            left: 0;
+            text-align: center;
+            display: none;
+            /*opacity: 0;
+            transition: opacity .5s;*/
+        }
+        #fullImg.shown>.label{
+            opacity:1;
+        }
+        #menu {
+            background: no-repeat url(menu.svg);
+            background-size: 18px;
+            width: 20px;
+            height: 20px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #ffffff47;
+            padding: 5px;
+            background-position: center;
+            border-radius: 8px;
+        }
+        #menu>ul{
+            position: absolute;
+            /* padding-left: 0; */
+            top: 12px;
+            background: #ffffff82;
+            padding: 0px;
+            left: 0px;
+            border-radius: 8px;
+            font-size: 120%;
+            white-space: nowrap;
+            overflow:hidden;
+
+            max-height:0;
+            transition: max-height .3s ease-in, padding .3s ease-in;
+            list-style-type:none
+        }
+
+        #menu:hover>ul{
+            max-height:500px;
+        }
+
+        #menu>ul {
+            color: black;
+        }
+
+        #menu>ul>li {
+            padding:.5rem;
+            cursor:pointer;
+        }
+
+        #menu>ul>li:hover {
+            background-color: #ff212147;
+        }
+        .hidden-text{display:none;}
+    </style>
+</head>
+<body>
+	<div id="thumbs"></div>
+	<img src="map.png" id="map"/>
+    <div id="fullImg">
+        <div class="bgr"> </div>
+        <div class="label"> </div>
+    </div>
+    <div id="fullText"><div></div></div>
+    <img id="dummy" />
+    <div id="menu">
+        <ul>
+            <li text="salar">Саларьево
+            <li text="hist">История
+            <li text="tours">Наши туры
+            <li text="contacts">Контакты
+        </ul>
+    </div>
+    <div><input type="checkbox" id="chEdit" label="edit"> Менять </div>
+    <div><input type="checkbox" id="chMove" label="move"> Двигать </div>
+
+
+    <div class="hidden-text" id="contacts">
+        8 977 110 63 21<br />
+        hello@salarievovisualtours.com<br />
+
+        Москва, Судостроительная ул., 27к2.
+    </div>
+    <div class="hidden-text" id="salar">
+        Прошлое и настоящее, урбанистика и неприкосновенная естественность, стремящийся ввысь и простирающийся на горизонт - даже этого недостаточно для того, чтобы рассказать о Саларьево! Уникальный район (тем более уникальный еще тем, что сам не до конца осознает свою уникальность) с развитой инфраструктурой и природным наследием. Здесь и Хованское кладбище, и детсады; и мусорный полигон, где давно нас покинувшее, и торговые центры, где мы только собираемся приобрести новое; и аутентичные кухни стран Востока, и сетевые рестораны быстрого питания; и деревня, и свежепостроенные жилые комплексы! Район контрастов и противоречий, который точно должен увидеть каждый посетитель столицы
+    </div>
+
+    <div class="hidden-text" id="hist">
+        Вместе с другими деревнями и селами, Саларьево входит в состав городского поселения Московский. Расположено оно чуть в стороне от Киевского шоссе. Историю деревни Саларьево можно проследить с середины XVI в., когда она принадлежала участнику Казанского и Полоцкого походов, а затем царскому казначею дьяку Никите Фунтикову, который непосредственно перед своей казнью «По Новгородскому делу» он успел продать вотчину Троице-Сергиевскому монастырю. В годы смуты Саларьево погибло, и в дозорных книгах 1614 г. значится пустошью. Однако, монастырь быстро заселил ее. Ко времени ликвидации монастырского землевладения село превратилась в крупнейшее селение округи. Не обошли стороной деревню и военные действия 1812 г. На месте захоронения крестьян на левом берегу речки поставлен памятник в виде белокаменного креста с выбитыми на нем цифрами «1812». Как и в других селениях, в начале 30-х гг. XIX века здесь был образован колхоз, славившийся своей молочно-товарной фермой. Колхоз «Борьба за коммуну» был самым передовым в районе. Постоянно занимал первое место в социалистических соревнованиях. Именно здесь впервые в Советском Союзе попробовали, а затем стали массово выращивать огурцы на полях. Во время Великой Отечественной Войны, когда враг уже стоял у входа в Москву, в колхозе было принято решение произвести эвакуацию скота. Эвакуацию проводили в Ивановскую область. По воспоминаниям очевидцев и участников этих событий эта эвакуация скота далась им очень тяжело. Идти приходилось ночью. Так как вокруг свистели снаряды и слышался гул самолетов, животные пугались и их очень трудно было удержать в стаде. Днем животных старались схоронить в лесах и низинах. Кроме того, животные нуждались в пище, их необходимо было доить. Однако, скот был спасен не смотря ни на что. После того, как враг оставил Москву, в колхоз скот был возвращен. Колхоз в основном и стал таким крепким и преуспевающим хозяйством только благодаря тому, что им удалась эта невероятная эвакуация. Однако, на этом трудовые подвиги жителей Саларьево не заканчиваются. 3 октября 1942 года, колхозники саларьевской сельхозартели «Борьба за коммуну» обратились с призывом ко всем колхозникам района организовать сбор средств на постройку танковой колонны «Кунцевский колхозник» Почин саларьевцев нашёл горячую поддержку в сельхозартелях района и других хозяйствах области. На деньги, которые были собраны со всего района были построены танковые колонны «Московский колхозник» в количестве двух штук. Три танковых полка Владимирской области получили новые танки. Но не только в этом заслуга саларьевских колхозников. На восстановление города Харькова было внесено 50 тысяч рублей; в поселке Внуково был восстановлен детский дом «Молодая гвардия», и для ведения подсобного хозяйства им было выделено 2 дойных коровы, две свиноматки и одна лошадь.Не оставались забытыми и семьи фронтовиков, для которых жителями деревни был специально создан фонд помощи таким семьям. Эти голодные, не щадящие себя труженики тыла собрали деньги, чтобы внести вклад в Победу. В самой деревне Саларьево стоит свое напоминание о войне – обелиск – который возведен в память павших жителей деревни. Всего их 77. Причем 50 человек числятся без вести пропавшими. История Саларьево поистине увлекательна. Сейчас район захватывает все новые и новые территории - и вот уже открывается юбилейная 200-я станция московского метрополитена. Мы поможем вам погрузиться в нее и открыть все тайны неизведанной души саларьевцев.
+    </div>
+
+    <div class="hidden-text" id="tours">
+        <h4>«Тайны Хованского кладбища: путь на автобусе в иной мир».</h4>
+
+        <p>
+        Какие загадки хранит в себе Хованское кладбище? Что расскажут нам призраки и души, чьи тела навсегда погребены в саларьевском районе? Мы увидим легендарную Стену скорби, Стену скорби №2, исторические захоронения саларьецев. Также нас ждет увлекательное обзорное путешествие на автобусе сквозь кладбище и визит к захоронению главной героини фильма «Завтрак у Тиффани».
+        </p>
+
+        <p>
+        «Саларьево автомобильное: главные дороги района»
+        Нас ждет увлекательное путешествие по главным районным автострадам. Мы будем переходить дорогу в неположенном месте, пытаться стопить транспорт, посетим легендарный памятник Ладе на пригорке рядом с ЖК «Саларьево Парк»
+        </p>
+
+        <p>
+        «Мусор или не мусор, вот в чем вопрос»
+        Что скрывается под оболочкой мусорного полигона? Что хранит под собой земная твердь? Ответы на эти и другие вопросы мы узнаем, когда прикоснемся к тайне огромной мусорной кучи рядом с новым ЖК. Она считается самой большой в Европе, - и не случайно: там действительно можно гулять часами и исследовать старое новое.
+        </p>
+         
+         <p>
+        «Вкус жизни. Где, как и кто развивает гастрономическую культуру в Саларьево»
+        Мало кто знает, но Саларьево является одним из истоков развития национальных кухонь в Москве. Здесь сосуществуют и узбекская, и турецкая, и кавказская кухни. Мы попробуем Саларьево на вкус: заглянем в маленькие кафе, попробуем не отравиться в придорожных забегаловках, научимся отличать шаурму от шавермы. Ношпу в руки - и бегм за новыми впечатлениями!
+        </p>
+    </div>
+
+    <div>Код (не терять)</div>
+    <textarea id="taCode" rows="10" cols="45"></textarea>
+</body>
+</html>
